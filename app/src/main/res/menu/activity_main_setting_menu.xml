@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_clear_local_data"
+        android:title="清除本地缓存" />
+
+    <item
+        android:id="@+id/menu_clear_remote_data"
+        android:title="清除云端数据" />
+
+    <item
+        android:id="@+id/menu_feedback"
+        android:title="用户反馈" />
+
+    <item
+        android:id="@+id/menu_about_us"
+        android:title="关于我们" />
+
+    <item
+        android:id="@+id/menu_give_prise"
+        android:title="给个好评" />
+
+    <item
+        android:id="@+id/menu_log_out"
+        android:title="退出登录" />
+
+</menu>

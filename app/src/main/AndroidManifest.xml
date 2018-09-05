@@ -8,14 +8,39 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/MyActivityTheme">
+
+        <!-- 主活动 -->
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="时间轴"
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 生活记录活动 -->
+        <activity
+            android:name=".activities.LifeRecordActivity"
+            android:label="时间轴" />
+        <!-- 漂流瓶活动 -->
+        <activity
+            android:name=".activities.DriftBottleActivity"
+            android:label="漂流瓶"/>
+        <!-- 便笺活动 -->
+        <activity
+            android:name=".activities.MemoActivity"
+            android:label="备忘录" />
+        <activity
+            android:name=".activities.ReadArticleActivity"
+            android:label="每天一文" />
+        <activity
+            android:name=".activities.EditTextActivity"
+            android:label="添加记录" />
+        <activity
+            android:name=".activities.TestActivity"
+            android:label="测试"></activity>
     </application>
 
 </manifest>

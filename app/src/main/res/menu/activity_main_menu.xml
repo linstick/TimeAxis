@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_add"
+        android:title="添加"
+        android:icon="@drawable/ic_add_white"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/menu_add_record"
+                android:icon="@drawable/ic_edit_white"
+                android:title="添加新记录"/>
+
+            <item
+                android:id="@+id/menu_add_memo"
+                android:icon="@drawable/ic_edit_white"
+                android:title="添加备忘录"/>
+
+            <item
+                android:id="@+id/menu_add_bottle"
+                android:icon="@drawable/ic_edit_white"
+                android:title="添加漂流瓶"/>
+
+            <item
+                android:id="@+id/menu_browse_bottle"
+                android:icon="@drawable/ic_directions_boat_white"
+                android:title="我的漂流瓶"/>
+        </menu>
+
+    </item>
+</menu>

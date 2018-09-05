@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
- * Instrumented test, which will execute on an Android device.
+ * Instrumented common_layout_toolbar, which will execute on an Android device.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under test.
+        // Context of the app under common_layout_toolbar.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.linstick.timeaxis", appContext.getPackageName());
