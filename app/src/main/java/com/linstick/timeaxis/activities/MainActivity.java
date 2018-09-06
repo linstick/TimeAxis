@@ -11,24 +11,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.linstick.timeaxis.R;
+import com.linstick.timeaxis.adapters.FeatureAdapter;
+import com.linstick.timeaxis.adapters.callback.OnFeatureItemClick;
+import com.linstick.timeaxis.beans.Feature;
+import com.linstick.timeaxis.views.CustomFeatureView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        OnFeatureItemClick {
 
     @BindView(R.id.layout_setting)
     DrawerLayout settingLayout;
     @BindView(R.id.side_bar)
     NavigationView sideBar;
+    @BindView(R.id.custom_feature_view)
+    CustomFeatureView customFeatureView;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    private List<Feature> mList;
+    private FeatureAdapter featureAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,44 +54,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white);
         }
         sideBar.setNavigationItemSelectedListener(this);
-    }
 
-    @OnClick({
-            R.id.ll_add_bottle,
-            R.id.ll_get_bottle,
-            R.id.ll_add_record,
-            R.id.ll_browse_record,
-            R.id.ll_browse_memo,
-            R.id.btn_read_article
+        mList = new ArrayList<>();
+        mList.add(new Feature(R.mipmap.ic_launcher_round, "记录", Feature.TYPE_ADD_RECORD));
+        mList.add(new Feature(R.mipmap.ic_launcher_round, "时间轴", Feature.TYPE_BROWSE_RECORD));
+        mList.add(new Feature(R.mipmap.ic_launcher, "阅读", Feature.TYPE_READ_ARTICLE));
+        mList.add(new Feature(R.mipmap.ic_launcher, "分享", Feature.TYPE_ADD_BOTTLE));
+        mList.add(new Feature(R.mipmap.ic_launcher, "拾荒", Feature.TYPE_GET_BOTTLE));
+        mList.add(new Feature(R.mipmap.ic_launcher_round, "计划", Feature.TYPE_BROWSE_MEMO));
 
-    })
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_add_bottle:
-                EditTextActivity.startAction(MainActivity.this, EditTextActivity.TYPE_ADD_BOTTLE);
-                break;
-
-            case R.id.ll_get_bottle:
-                Toast.makeText(MainActivity.this, "获取漂流瓶", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.ll_add_record:
-                EditTextActivity.startAction(MainActivity.this, EditTextActivity.TYPE_ADD_RECORD);
-                break;
-
-            case R.id.ll_browse_record:
-                startActivity(new Intent(MainActivity.this, LifeRecordActivity.class));
-                break;
-
-            case R.id.ll_browse_memo:
-                startActivity(new Intent(MainActivity.this, MemoActivity.class));
-                break;
-
-            case R.id.btn_read_article:
-                startActivity(new Intent(MainActivity.this, ReadArticleActivity.class));
-                break;
-
-        }
+        featureAdapter = new FeatureAdapter(mList);
+        featureAdapter.setOnItemClickListener(this);
+        customFeatureView.setAdapter(featureAdapter);
     }
 
     @Override
@@ -117,6 +103,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.menu_reset_feature:
+                customFeatureView.resetFeatureIconData();
+                break;
+
+            case R.id.menu_set_main_bg:
+                Toast.makeText(MainActivity.this, " 更换应用背景", Toast.LENGTH_SHORT).show();
+
+                break;
             case R.id.menu_clear_local_data:
                 Toast.makeText(MainActivity.this, "清除本地数据", Toast.LENGTH_SHORT).show();
                 break;
@@ -141,7 +136,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
                 break;
         }
-        settingLayout.closeDrawer(GravityCompat.END);
+        settingLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        int type = mList.get(position).getType();
+        switch (type) {
+            case Feature.TYPE_ADD_BOTTLE:
+                EditTextActivity.startAction(MainActivity.this, EditTextActivity.TYPE_ADD_BOTTLE);
+                break;
+
+            case Feature.TYPE_BROWSE_MEMO:
+                startActivity(new Intent(MainActivity.this, MemoActivity.class));
+
+                break;
+
+            case Feature.TYPE_GET_BOTTLE:
+                Toast.makeText(MainActivity.this, "获取漂流瓶", Toast.LENGTH_SHORT).show();
+
+                break;
+
+            case Feature.TYPE_BROWSE_RECORD:
+                startActivity(new Intent(MainActivity.this, LifeRecordActivity.class));
+                break;
+
+            case Feature.TYPE_READ_ARTICLE:
+                startActivity(new Intent(MainActivity.this, ReadArticleActivity.class));
+                break;
+
+            case Feature.TYPE_ADD_RECORD:
+                EditTextActivity.startAction(MainActivity.this, EditTextActivity.TYPE_ADD_RECORD);
+                break;
+
+        }
     }
 }

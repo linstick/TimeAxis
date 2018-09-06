@@ -27,7 +27,7 @@
         <!-- 漂流瓶活动 -->
         <activity
             android:name=".activities.DriftBottleActivity"
-            android:label="漂流瓶"/>
+            android:label="漂流瓶" />
         <!-- 便笺活动 -->
         <activity
             android:name=".activities.MemoActivity"

@@ -2,6 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_reset_feature"
+        android:title="一键整理图标" />
+
+    <item
+        android:id="@+id/menu_set_main_bg"
+        android:title="更换应用背景" />
+
+    <item
         android:id="@+id/menu_clear_local_data"
         android:title="清除本地缓存" />
 

@@ -1,9 +1,9 @@
 package com.linstick.timeaxis.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,15 +13,12 @@ import com.linstick.timeaxis.beans.Feature;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
  * Created by Administrator on 2018/9/5/005.
  */
 
-public class FeatureAdapter extends RecyclerView.Adapter<FeatureAdapter.ViewHolder> {
+public class FeatureAdapter extends BaseAdapter {
+    private static final String TAG = "FeatureAdapter";
 
     private List<Feature> mList;
     private OnFeatureItemClick listener;
@@ -35,42 +32,31 @@ public class FeatureAdapter extends RecyclerView.Adapter<FeatureAdapter.ViewHold
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_activity_main_feature, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.featureIv.setImageResource(mList.get(position).getImgRes());
-        holder.titleTv.setText(mList.get(position).getTitle());
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return mList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_feature)
-        ImageView featureIv;
-        @BindView(R.id.tv_title)
-        TextView titleTv;
+    @Override
+    public Object getItem(int position) {
+        return mList.get(position);
+    }
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-        @OnClick(R.id.iv_feature)
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.iv_feature:
-                    if (listener != null) {
-                        listener.onItemClick(getAdapterPosition());
-                    }
-                    break;
-            }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_activity_main_feature, parent, false);
+        ((ImageView) view.findViewById(R.id.iv_feature)).setImageResource(mList.get(position).getImgRes());
+        ((TextView) view.findViewById(R.id.tv_title)).setText(mList.get(position).getTitle());
+        return view;
+    }
+
+    public void onItemClick(View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(position);
         }
     }
 }

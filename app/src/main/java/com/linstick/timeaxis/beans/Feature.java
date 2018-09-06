@@ -5,18 +5,26 @@ package com.linstick.timeaxis.beans;
  */
 
 public class Feature {
-    int imgRes;
-    String title;
-    Class intentClass;
+
+    public static final int TYPE_ADD_BOTTLE = 1;
+    public static final int TYPE_GET_BOTTLE = 2;
+    public static final int TYPE_BROWSE_MEMO = 3;
+    public static final int TYPE_ADD_RECORD = 4;
+    public static final int TYPE_BROWSE_RECORD = 5;
+    public static final int TYPE_READ_ARTICLE = 6;
+
+
+    private int imgRes;
+    private String title;
+    private int type;
 
     public Feature() {
-
     }
 
-    public Feature(int imgRes, String title, Class intentClass) {
+    public Feature(int imgRes, String title, int type) {
         this.imgRes = imgRes;
         this.title = title;
-        this.intentClass = intentClass;
+        this.type = type;
     }
 
     public int getImgRes() {
@@ -35,11 +43,11 @@ public class Feature {
         this.title = title;
     }
 
-    public Class getIntentClass() {
-        return intentClass;
+    public int getType() {
+        return type;
     }
 
-    public void setIntentClass(Class intentClass) {
-        this.intentClass = intentClass;
+    public void setType(int type) {
+        this.type = type;
     }
 }
